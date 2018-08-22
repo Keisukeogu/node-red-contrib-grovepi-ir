@@ -1,0 +1,40 @@
+<script type="text/javascript">
+    RED.nodes.registerType('inf-sensor',{
+      category: 'input',
+      color: '#a6bbcf',
+      defaults:{
+        name: {value:""},
+        pin: {value:"0",required: true}
+      },
+      inputs:0,
+      outputs:1,
+      icon: "bridge-dash.png",
+      label: function(){
+          return this.name||"inf-sensor";
+      }
+    });
+</script>
+
+<script type="text/x-red" data-template-name="inf-sensor">
+  <div class="form-row">
+    <label for="node-input-name"><i class="icon-tag"></i> Name</label>
+    <input type="text" id="node-input-name" placeholder="Name">
+  </div>
+  <div class="form-row" id="grovepi-pin-row">
+    <label for="node-input-pin"><i class="fa fa-plug"></i> Digital Pin</label>
+    <select id="node-input-pin">
+    <option value="2">Digital 2</option>
+    <option value="3">Digital 3</option>
+    <option value="4">Digital 4</option>
+    <option value="5">Digital 5</option>
+    <option value="6">Digital 6</option>
+    <option value="7">Digital 7</option>
+    <option value="8">Digital 8</option>
+  </select>
+  </div>
+  <div class="form-tips"><b>Tip:</b> This is here to help.</div>
+</script>
+
+<script type="text/x-red" data-help-name="inf-sensor">
+    <p>A simple node that converts the message payloads into all lower-case characters</p>
+</script>

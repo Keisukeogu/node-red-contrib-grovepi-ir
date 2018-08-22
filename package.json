@@ -1,0 +1,31 @@
+{
+  "name": "node-red-contrib-grovepi-ir",
+  "version": "1.0.0",
+  "description": "test for grovepi",
+  "main": "ir.js",
+  "scripts": {
+    "test": "echo \"Error: no test specified\" && exit 1"
+  },
+  "node-red": {
+    "nodes": {
+      "inf-sensor": "ir.js"
+    }
+  },
+  "dependencies": {
+    "node-grovepi": "latest"
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/Keisukeogu/node-red-contrib-grovepi-ir.git"
+  },
+  "keywords": [
+    "node-red",
+    "grovepi"
+  ],
+  "author": "keisukeoguri",
+  "license": "Apache-2.0",
+  "bugs": {
+    "url": "https://github.com/Keisukeogu/node-red-contrib-grovepi-ir/issues"
+  },
+  "homepage": "https://github.com/Keisukeogu/node-red-contrib-grovepi-ir#readme"
+}
