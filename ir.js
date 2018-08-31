@@ -22,15 +22,27 @@
 }
 */
 module.exports = function(RED){
-  function GrovePiDigitalSensorNode(n){
-    RED.nodes.createNode(this,n);
+  function GrovePiDigitalSensorNode(config){
+    RED.nodes.createNode(this,config);
     var node = this;
-    var Grovepi = require('node-grovepi').GrovePi;
-    var Digital = GrovePi.sensors.base.Digital;
-    var digital = new Digital(node.pin);
-    board.pinMode(node.pin,'input');
+
+
+    this.status({fill:"red",shape:"ring",text:"disconnected"});
 
     this.on('input',function(msg_input){
+      var Grovepi = require('node-grovepi').GrovePi;
+      var Digital = GrovePi.sensors.base.Digital;
+      var digital = new Digital(this.pin);
+      var board = new Board({
+        debug: true,
+        onError: function(err){
+          console.error('GrovePiBoard.js: Something went wrong');
+          console.error(err);
+        },
+      });
+
+      board.pinMode(this.pin,'input');
+
       if(msg_input === 0){
         msg = "true";
       }else{
@@ -38,6 +50,22 @@ module.exports = function(RED){
       }
       this.send(msg);
     });
+
+    if(this.pin !== undefined){
+      this.running = true;
+      this.status({fill:"green",shape:"dot",text:"ok"});
+
+      this.on("input",inputlistener);
+    }
+    else{this.warn("Invalid port: " + this.pin); }
+      this.on("close",function(done){
+        this.sstatus({fill:"grey",shape:"ring",text:"closed"});
+        this.sensor(function(){
+          done();
+        });
+      });
+
+
   }
   RED.nodes.registerType("inf-sensor",GrovePiDigitalSensorNode);
 }
